@@ -1,4 +1,4 @@
-sala(cozinha).
+que1234@homail.comsala(cozinha).
 sala(escritório).
 sala('sala de estar').
 sala(banheiro).
