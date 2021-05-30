@@ -1,4 +1,4 @@
-que1234@homail.comsala(cozinha).
+sala(cozinha).
 sala(escritório).
 sala('sala de estar').
 sala(banheiro).
@@ -38,13 +38,13 @@ procurar_comida(X,Y) :-
 
 conectado(X,Y) :- porta(X,Y).
 
-observar(Lugar) :-  
+observar_coisas(Lugar) :-  
   localizado(X, Lugar),
   tab(2),
   write(X),
   nl,
   fail.
-observar(_).
+observar_coisas(_).
 
 listar_conectados(Lugar) :-
   conectado(Lugar, X),
@@ -53,5 +53,33 @@ listar_conectados(Lugar) :-
   nl,
   fail.
 listar_conectados(_).
+
+observar :-
+  aqui(Lugar),
+  write('Onde você está: '), write(Lugar), nl,
+  write('Vovê pode ver:'), nl,
+  observar_coisas(Lugar),
+  write('Você pode ir:'), nl,
+  listar_conectados(Lugar).
+
+pode_ir(Lugar):- 
+  aqui(X),
+  conectado(X, Lugar).
+pode_ir(Lugar):-
+  aqui(X),
+  X = Lugar,
+  write('Você já está aqui...').
+pode_ir(Lugar):-
+  write('Daqui você não consegue chegar lá...'), nl,
+  fail.
+
+ir_para(Lugar):-  
+  pode_ir(Lugar),
+  mover(Lugar),
+  observar.
+
+mover(Lugar):-
+  retract(aqui(X)),
+  asserta(aqui(Lugar)).
 
 aqui(cozinha).
