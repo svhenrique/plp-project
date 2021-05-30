@@ -57,7 +57,7 @@ listar_conectados(_).
 observar :-
   aqui(Lugar),
   write('Onde você está: '), write(Lugar), nl,
-  write('Vovê pode ver:'), nl,
+  write('Você pode ver:'), nl,
   observar_coisas(Lugar),
   write('Você pode ir:'), nl,
   listar_conectados(Lugar).
@@ -79,6 +79,7 @@ ir_para(Lugar):-
   observar.
 
 mover(Lugar):-
+  dynamic(aqui(X)),
   retract(aqui(X)),
   asserta(aqui(Lugar)).
 
